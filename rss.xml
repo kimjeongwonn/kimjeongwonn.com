@@ -1,4 +1,87 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 16 Aug 2021 05:59:17 GMT</lastBuildDate><item><title><![CDATA[자바스크립트의 핵심 '실행 컨텍스트']]></title><description><![CDATA[자바스크립트를 공부하면서 개인적으로 자바스크립트에서 가장 중요한 개념을 꼽자면 를 꼽는다. 자바스크립트의 핵심 개념들을 나열 해 보라고 한다면 보통 프로토타입, this…]]></description><link>https://kimjeongwonn.github.io/자바스크립트의-핵심-실행컨텍스트/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/자바스크립트의-핵심-실행컨텍스트/</guid><pubDate>Mon, 16 Aug 2021 05:59:05 GMT</pubDate><content:encoded>&lt;p&gt;자바스크립트를 공부하면서 개인적으로 자바스크립트에서 가장 중요한 개념을 꼽자면 &lt;code class=&quot;language-text&quot;&gt;실행 컨텍스트&lt;/code&gt;를 꼽는다. 자바스크립트의 핵심 개념들을 나열 해 보라고 한다면 보통 프로토타입, this 바인딩, 호이스팅, 렉시컬 스코프, 클로저, 이벤트 루프등을 떠올릴 수 있고 그 중에서도 앞의 개념들을 관통하는 가장 핵심적인 개념이 &lt;code class=&quot;language-text&quot;&gt;실행 컨텍스트&lt;/code&gt;이다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 16 Aug 2021 09:21:16 GMT</lastBuildDate><item><title><![CDATA[\[CS\] 운영체제 - 인터페이스]]></title><description><![CDATA[운영체제 사용자는 응용프로그램을 이용해 원하는 작업을 실행 이 때 응용프로그램이 작업을 수행하기 위해서 시스템 자원을 요청. 운영체제는 응용프로그램이 요청한 시스템 자원을 효율적으로 분배하여 제공/회수한다. Interface…]]></description><link>https://kimjeongwonn.github.io/[CS]운영체제-인터페이스/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]운영체제-인터페이스/</guid><pubDate>Mon, 16 Aug 2021 09:20:05 GMT</pubDate><content:encoded>&lt;h2&gt;운영체제&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;사용자는 응용프로그램을 이용해 원하는 작업을 실행&lt;/li&gt;
+&lt;li&gt;이 때 응용프로그램이 작업을 수행하기 위해서 시스템 자원을 요청.&lt;/li&gt;
+&lt;li&gt;운영체제는 응용프로그램이 요청한 시스템 자원을 효율적으로 분배하여 제공/회수한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Interface&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;사용자가 운영체제를 사용하기 위해서 인터페이스가 필요한데 Shell이 그 역할을 해줌
+&lt;ul&gt;
+&lt;li&gt;명령어를 통해 운영체제를 사용할 수 있음&lt;/li&gt;
+&lt;li&gt;Shell 또한 일종의 응용프로그램&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;응용프로그램이 운영체제를 사용하기 위해서는 API (Application Programming Interface)이 그 역할을 한다.
+&lt;ul&gt;
+&lt;li&gt;API는 프로그래밍 언어별로 제공되어야 한다.&lt;/li&gt;
+&lt;li&gt;함수로 제공하여 호출을 통해 운영체제를 조작한다.&lt;/li&gt;
+&lt;li&gt;보통은 함수들을 묶어서 라이브러리 형태로 제공.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Shell은 사용자, API는 응용프로그램이 운영체제를 사용하기 위한 인터페이스
+&lt;ul&gt;
+&lt;li&gt;결국은 Shell도 API를 사용해서 동작한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;운영체제는 시스템 콜을 통해 운영체제의 기능을 사용할 수 있게 해준다.
+&lt;ul&gt;
+&lt;li&gt;API는 시스템 콜을 사용해 운영체제의 기능을 사용할 수 있다.&lt;/li&gt;
+&lt;li&gt;시스템 콜은 운영체제를 직접 사용하기 때문에 사용방법이 까다롭고 어렵기 때문에 API로 사용하는 것이 인간 입장에서 편리하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;사용자 → 응용프로그램 → API → 시스템 콜 → 운영체제 → 하드웨어&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;시스템 콜과 API&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;시스템 콜 : 운영체제가 제공하는 기능 호출 함수
+&lt;ul&gt;
+&lt;li&gt;유닉스 계열은 보통 POSIX API를 기준으로 시스템콜을 정의&lt;/li&gt;
+&lt;li&gt;커널 모드에서 실행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;API : 각 언어별로 시스템 콜을 호출할 수 있는 Wrapper 함수
+&lt;ul&gt;
+&lt;li&gt;사용자 모드에서 실행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;CPU Protection Rings&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU는 권한 모드를 갖고 있음
+&lt;ul&gt;
+&lt;li&gt;사용자 모드 → 일반적인 명령을 실행할 수 있음
+&lt;ul&gt;
+&lt;li&gt;응용 프로그램에서 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;커널 모드 → 특권 명령어 실행과 자원 접근을 가능하게 해줌
+&lt;ul&gt;
+&lt;li&gt;운영체제에서 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;인텔 CPU 기준으로 &lt;code class=&quot;language-text&quot;&gt;Ring3&lt;/code&gt; ~ &lt;code class=&quot;language-text&quot;&gt;Ring0&lt;/code&gt;까지 권한이 있음
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;Ring3&lt;/code&gt;을 보통 사용자 모드라고 지칭&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;Ring0&lt;/code&gt;를 보통 커널 모드라고 지칭&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;CPU에서는 현재 모드를 참조하여 권한이 없는 명령을 차단하여 보호&lt;/li&gt;
+&lt;li&gt;사용자가 응용프로그램을 사용할 때 커널 모드에서 조작해야 하는 명령은 API와 시스템 콜을 통해 운영체제가 커널모드에서 CPU에게 명령을 전달&lt;/li&gt;
+&lt;li&gt;보통 하드웨어에 접근해야 하는 경우 커널 모드에서 실행된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Kernel&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;사전적 의미로 &lt;code class=&quot;language-text&quot;&gt;알맹이 / 핵심&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;운영체제의 핵심적인 알맹이&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Shell&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;사전적 의미로 껍데기&lt;/li&gt;
+&lt;li&gt;운영체제의 핵심적인 기능을 감싸는 껍데기&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[자바스크립트의 핵심 '실행 컨텍스트']]></title><description><![CDATA[자바스크립트를 공부하면서 개인적으로 자바스크립트에서 가장 중요한 개념을 꼽자면 를 꼽는다. 자바스크립트의 핵심 개념들을 나열 해 보라고 한다면 보통 프로토타입, this…]]></description><link>https://kimjeongwonn.github.io/자바스크립트의-핵심-실행컨텍스트/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/자바스크립트의-핵심-실행컨텍스트/</guid><pubDate>Mon, 16 Aug 2021 05:59:05 GMT</pubDate><content:encoded>&lt;p&gt;자바스크립트를 공부하면서 개인적으로 자바스크립트에서 가장 중요한 개념을 꼽자면 &lt;code class=&quot;language-text&quot;&gt;실행 컨텍스트&lt;/code&gt;를 꼽는다. 자바스크립트의 핵심 개념들을 나열 해 보라고 한다면 보통 프로토타입, this 바인딩, 호이스팅, 렉시컬 스코프, 클로저, 이벤트 루프등을 떠올릴 수 있고 그 중에서도 앞의 개념들을 관통하는 가장 핵심적인 개념이 &lt;code class=&quot;language-text&quot;&gt;실행 컨텍스트&lt;/code&gt;이다.&lt;/p&gt;
 &lt;h2&gt;실행 환경&lt;/h2&gt;
 &lt;p&gt;실행 컨텍스트(이하 EC; Execution Context)는 실행 컨텍스트 스택에서 구성된다. 그리고 모든 코드는 EC 안에서 작동한다. 코드가 평가되기 위해서 자바스크립트 엔진은 EC를 생성한 뒤 코드를 평가하는데 EC가 생성되는 상황은 크게 세가지가 있다.&lt;/p&gt;
 &lt;ol&gt;

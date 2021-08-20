@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 20 Aug 2021 04:44:06 GMT</lastBuildDate><item><title><![CDATA[[CS] 프로세스]]></title><description><![CDATA[스케쥴러 배치 처리 시스템 시스템이 여러개의 프로그램을 순차적으로 처리하는 방식 Queue 자료구조와 비슷한 방식으로 동작 하나의 프로그램이 실행되는 동안 다른 작업을 하지 못함 → 한 번에 하나의 프로그램 처리만 가능 멀티 태스킹 단일 CPU…]]></description><link>https://kimjeongwonn.github.io/[CS]프로세스/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]프로세스/</guid><pubDate>Tue, 17 Aug 2021 08:29:30 GMT</pubDate><content:encoded>&lt;h2&gt;스케쥴러&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 20 Aug 2021 12:20:06 GMT</lastBuildDate><item><title><![CDATA[[CS] 프로세스]]></title><description><![CDATA[스케쥴러 배치 처리 시스템 시스템이 여러개의 프로그램을 순차적으로 처리하는 방식 Queue 자료구조와 비슷한 방식으로 동작 하나의 프로그램이 실행되는 동안 다른 작업을 하지 못함 → 한 번에 하나의 프로그램 처리만 가능 멀티 태스킹 단일 CPU…]]></description><link>https://kimjeongwonn.github.io/[CS]프로세스/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]프로세스/</guid><pubDate>Tue, 17 Aug 2021 08:29:30 GMT</pubDate><content:encoded>&lt;h2&gt;스케쥴러&lt;/h2&gt;
 &lt;h3&gt;배치 처리 시스템&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;시스템이 여러개의 프로그램을 순차적으로 처리하는 방식
@@ -167,6 +167,62 @@
 &lt;li&gt;예) RoundRobin + Priority-based
 &lt;ul&gt;
 &lt;li&gt;우선순위를 갖는 시분할 스케쥴러&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;인터럽트&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU가 작업을 처리중인 상황에 하드웨어나 소프트웨어의 이벤트 발생, 예외상황 발생 처리를 위해 CPU에 알려주는 기술&lt;/li&gt;
+&lt;li&gt;일종의 이벤트로 볼 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;인터럽트가 필요한 이유&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;선점형 스케쥴러의 구현을 위해서는 running 상태의 프로세스를 중단시키고 다른 프로세스로 교체해야 함
+&lt;ul&gt;
+&lt;li&gt;이를 위해 스케쥴러 코드가 인터럽트를 통해 현재 실행중인 프로세스를 중단 시켜야 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;입출력 장치의 처리 혹은 예외상황(0으로 나누기 등)이 발생했을 때 CPU에서 해당 상황에 대한 처리를 위해 인터럽트를 통해 알릴 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;인터럽트의 종류&lt;/h3&gt;
+&lt;h4&gt;내부 인터럽트 (소프트웨어 인터럽트)&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Divide-by-Zero 인터럽트 : 0으로 나누는 명령 실행 시 발생하는 인터럽트&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;사용자 모드에서 잘못된 공간 접근 시
+&lt;ul&gt;
+&lt;li&gt;프로세스는 4GB의 메모리를 사용할 수 있는데 사용자 모드에서는 0GB&lt;del&gt;3GB, 커널모드에서는 3GB&lt;/del&gt;4GB에 접근할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;계산 결과에서 Overflow 혹은 Underflow가 발생할 때&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;외부 인터럽트 (하드웨어 인터럽트)&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;타이머 인터럽트 : 선점형 스케쥴러를 구현하기 위해 일정 시간마다 인터럽트를 계속 발생시켜 현재 처리해야 하는 프로세스를 결정할 수 있음&lt;/li&gt;
+&lt;li&gt;입출력 인터럽트 : 입출력 장치(키보드, 마우스, 저장매체, 프린터 등)에서 작업을 처리하고 완료됐음을 알려서 후속 처리를 할 수 있음&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;인터럽트 동작&lt;/h3&gt;
+&lt;h4&gt;시스템 콜 인터럽트&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;시스템 콜을 실행하기 위해 인터럽트 명령을 넣어 실행시켜야 한다. → 커널 모드로 전환을 위해
+&lt;ul&gt;
+&lt;li&gt;eax 레지스터에 시스템 콜 번호를, ebx 레지스터에 인자값을 넣고 소프트웨어 인터럽트를 호출하면서 시스템콜에 해당하는 0x80값을 넘겨서 호출&lt;/li&gt;
+&lt;li&gt;CPU가 커널모드로 IDT에서 0x80에 해당하는 함수(시스템 콜)를 실행&lt;/li&gt;
+&lt;li&gt;시스템 콜 함수가 eax 레지스터에 저장된 시스템 콜 번호를 통해 원하는 시스템 콜 호출&lt;/li&gt;
+&lt;li&gt;함수 실행 후, 다시 사용자 모드로 변경하고 다시 해당 프로세스 다음코드 실행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;IDT&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;인터럽트는 미리 정의되어 있는 실행코드의 주소를 IDT에 저장하고 있음&lt;/li&gt;
+&lt;li&gt;컴퓨터 부팅 시 운영체제가 커널 영역에 IDT영역을 초기화하고 정의함&lt;/li&gt;
+&lt;li&gt;리눅스 기준으로 아래와 같이 구분되어 있음
+&lt;ul&gt;
+&lt;li&gt;0 ~ 31 : 예외상황 인터럽트&lt;/li&gt;
+&lt;li&gt;32 ~ 47 : 하드웨어 인터럽트&lt;/li&gt;
+&lt;li&gt;128(&lt;code class=&quot;language-text&quot;&gt;0x80&lt;/code&gt;) : 시스템 콜&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[[CS] 운영체제]]></title><description><![CDATA[운영체제 사용자는 응용프로그램을 이용해 원하는 작업을 실행 이 때 응용프로그램이 작업을 수행하기 위해서 시스템 자원을 요청. 운영체제는 응용프로그램이 요청한 시스템 자원을 효율적으로 분배하여 제공/회수한다. Interface…]]></description><link>https://kimjeongwonn.github.io/[CS]운영체제/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]운영체제/</guid><pubDate>Mon, 16 Aug 2021 09:20:05 GMT</pubDate><content:encoded>&lt;h2&gt;운영체제&lt;/h2&gt;

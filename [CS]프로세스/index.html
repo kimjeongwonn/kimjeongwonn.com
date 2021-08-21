@@ -228,4 +228,26 @@
 <li>128(<code class="language-text">0x80</code>) : 시스템 콜</li>
 </ul>
 </li>
+</ul>
+<h2>컨텍스트 스위칭</h2>
+<h3>프로세스의 구조</h3>
+<ul>
+<li>코드가 컴파일 되면서 기계어로 전환되어 실행파일로 만들어 진다.</li>
+<li>실행 파일을 실행하면 프로세스가 생성되고 프로세스 내부에 코드 영역에 기계어로 변환 된 코드가 올라간다.</li>
+<li>코드 영역의 코드를 실행하고 코드 내부에서 전역으로 선언 된 변수는 데이터 영역에 저장된다</li>
+<li>함수가 실행되고 내부에서 선언된 매개변수, 변수는 함수 반환 시 메모리 함께 사라지기 때문에 스택 영역에 저장된다.
+<ul>
+<li>함수가 실행 될 때 함수가 반환되고 이동할 Return Address를 먼저 Push한다.</li>
+<li>차례대로 매개변수와 변수를 Push한다.</li>
+<li>함수가 종료되면 차례대로 Pop하고 마지막에 Return Address가 Pop되면 해당 주소로 이동한다.</li>
+</ul>
+</li>
+<li>프로세스 내에서 동적인 데이터를 담는 메모리 공간이 필요할 때 힙 영역에 저장된다.</li>
+<li>코드 영역과 데이터 영역은 프로세스 생성시 정적으로 결정된다.</li>
+<li>스택 영역은 프로세스 메모리주소의 최대값 부터 힙 영역은 코드영역 다음부터 정의되며 동적으로 할당된다.</li>
+</ul>
+<h4>프로세스 레지스터</h4>
+<ul>
+<li>PC(Program counter) : 코드가 실행되는 주소값을 저장하는 레지스터</li>
+<li>SP(Stack Pointer) : 현재 스택의 Top주소를 저장하는 레지스터</li>
 </ul></section><hr/><footer></footer></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/[CS]운영체제/">← <!-- -->[CS] 운영체제</a></li><li></li></ul></nav></main><footer>© <!-- -->2021</footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/[CS]프로세스/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-22d8e52467af59d6195e.js"],"app":["/app-9efc9f01be414ff97736.js"],"component---src-pages-404-js":["/component---src-pages-404-js-e3b7bf6b448cc0693d07.js"],"component---src-pages-about-js":["/component---src-pages-about-js-8f92fdbe885f42521337.js"],"component---src-pages-index-js":["/component---src-pages-index-js-bb4c07a3c58b24373d0e.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-38cea8ed3b546c66ff97.js"]};/*]]>*/</script><script src="/polyfill-22d8e52467af59d6195e.js" nomodule=""></script><script src="/component---src-templates-blog-post-js-38cea8ed3b546c66ff97.js" async=""></script><script src="/commons-92247d2d2a91ce365536.js" async=""></script><script src="/app-9efc9f01be414ff97736.js" async=""></script><script src="/framework-de777ff0ab3a85d108fd.js" async=""></script><script src="/webpack-runtime-91e26ca927397cd9e11f.js" async=""></script></body></html>

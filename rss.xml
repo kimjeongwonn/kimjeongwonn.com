@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 20 Aug 2021 12:20:06 GMT</lastBuildDate><item><title><![CDATA[[CS] 프로세스]]></title><description><![CDATA[스케쥴러 배치 처리 시스템 시스템이 여러개의 프로그램을 순차적으로 처리하는 방식 Queue 자료구조와 비슷한 방식으로 동작 하나의 프로그램이 실행되는 동안 다른 작업을 하지 못함 → 한 번에 하나의 프로그램 처리만 가능 멀티 태스킹 단일 CPU…]]></description><link>https://kimjeongwonn.github.io/[CS]프로세스/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]프로세스/</guid><pubDate>Tue, 17 Aug 2021 08:29:30 GMT</pubDate><content:encoded>&lt;h2&gt;스케쥴러&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 21 Aug 2021 12:17:16 GMT</lastBuildDate><item><title><![CDATA[[CS] 프로세스]]></title><description><![CDATA[스케쥴러 배치 처리 시스템 시스템이 여러개의 프로그램을 순차적으로 처리하는 방식 Queue 자료구조와 비슷한 방식으로 동작 하나의 프로그램이 실행되는 동안 다른 작업을 하지 못함 → 한 번에 하나의 프로그램 처리만 가능 멀티 태스킹 단일 CPU…]]></description><link>https://kimjeongwonn.github.io/[CS]프로세스/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]프로세스/</guid><pubDate>Tue, 17 Aug 2021 08:29:30 GMT</pubDate><content:encoded>&lt;h2&gt;스케쥴러&lt;/h2&gt;
 &lt;h3&gt;배치 처리 시스템&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;시스템이 여러개의 프로그램을 순차적으로 처리하는 방식
@@ -225,6 +225,28 @@
 &lt;li&gt;128(&lt;code class=&quot;language-text&quot;&gt;0x80&lt;/code&gt;) : 시스템 콜&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;컨텍스트 스위칭&lt;/h2&gt;
+&lt;h3&gt;프로세스의 구조&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;코드가 컴파일 되면서 기계어로 전환되어 실행파일로 만들어 진다.&lt;/li&gt;
+&lt;li&gt;실행 파일을 실행하면 프로세스가 생성되고 프로세스 내부에 코드 영역에 기계어로 변환 된 코드가 올라간다.&lt;/li&gt;
+&lt;li&gt;코드 영역의 코드를 실행하고 코드 내부에서 전역으로 선언 된 변수는 데이터 영역에 저장된다&lt;/li&gt;
+&lt;li&gt;함수가 실행되고 내부에서 선언된 매개변수, 변수는 함수 반환 시 메모리 함께 사라지기 때문에 스택 영역에 저장된다.
+&lt;ul&gt;
+&lt;li&gt;함수가 실행 될 때 함수가 반환되고 이동할 Return Address를 먼저 Push한다.&lt;/li&gt;
+&lt;li&gt;차례대로 매개변수와 변수를 Push한다.&lt;/li&gt;
+&lt;li&gt;함수가 종료되면 차례대로 Pop하고 마지막에 Return Address가 Pop되면 해당 주소로 이동한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;프로세스 내에서 동적인 데이터를 담는 메모리 공간이 필요할 때 힙 영역에 저장된다.&lt;/li&gt;
+&lt;li&gt;코드 영역과 데이터 영역은 프로세스 생성시 정적으로 결정된다.&lt;/li&gt;
+&lt;li&gt;스택 영역은 프로세스 메모리주소의 최대값 부터 힙 영역은 코드영역 다음부터 정의되며 동적으로 할당된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;프로세스 레지스터&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;PC(Program counter) : 코드가 실행되는 주소값을 저장하는 레지스터&lt;/li&gt;
+&lt;li&gt;SP(Stack Pointer) : 현재 스택의 Top주소를 저장하는 레지스터&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[[CS] 운영체제]]></title><description><![CDATA[운영체제 사용자는 응용프로그램을 이용해 원하는 작업을 실행 이 때 응용프로그램이 작업을 수행하기 위해서 시스템 자원을 요청. 운영체제는 응용프로그램이 요청한 시스템 자원을 효율적으로 분배하여 제공/회수한다. Interface…]]></description><link>https://kimjeongwonn.github.io/[CS]운영체제/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]운영체제/</guid><pubDate>Mon, 16 Aug 2021 09:20:05 GMT</pubDate><content:encoded>&lt;h2&gt;운영체제&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;사용자는 응용프로그램을 이용해 원하는 작업을 실행&lt;/li&gt;

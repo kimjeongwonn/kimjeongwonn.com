@@ -256,12 +256,12 @@
 <li>EBP : 함수가 호출되면 EBP에서 함수가 시작되는 부분을 기록해서 예외가 발생했을 때 예외가 발생한 함수를 특정할 수 있게 해 주는 레지스터</li>
 <li>EAX : 함수의 반환값을 저장하는 레지스터</li>
 </ul>
-<h2>힙 영역</h2>
+<h3>힙 영역</h3>
 <ul>
 <li>동적인 메모리의 공간을 관리하는 영역</li>
 <li>힙 영역의 주소값을 스택 영역에 저장하여 변수에 할당할 수 있음</li>
 </ul>
-<h2>데이터 영역</h2>
+<h3>데이터 영역</h3>
 <ul>
 <li>데이터 영역은 두가지로 구분된다.</li>
 <li>BSS : 초기화되지 않은 전역변수
@@ -275,9 +275,66 @@
 </ul>
 </li>
 </ul>
-<h1>컨텍스트 스위칭</h1>
+<h2>컨텍스트 스위칭</h2>
 <ul>
 <li>스케쥴러가 running 상태의 프로세스를 바꿀 때 두 프로세스에서 상태를 변경하는 방법</li>
-<li>A → B 로 컨텍스트 스위칭이 일어나면 현재 레지스터의 PC와 SP를 PCB라는 공간에 저장해서 현재 실행중인 상태를 보관할 수 있음</li>
+<li>A → B 로 컨텍스트 스위칭이 일어나면 현재 레지스터의 PC와 SP를 <code class="language-text">PCB(Process Control Block)</code>에 저장해서 현재 실행중인 상태를 보관할 수 있음</li>
 <li>B → A 로 다시 컨텍스트 스위칭이 일어나면 PCB를 확인해서 저장된 PC와 SP를 레지스터에 덮어씌워 이전에 진행하던 상태로 돌아옴</li>
+</ul>
+<h4>PCB</h4>
+<ul>
+<li>프로세스가 실행중인 상태를 캡쳐/구조화 해서 저장하는 공간</li>
+<li>프로세스ID, 레지스터 값(PC, SP 등), 스케쥴링 상태 정보, 메모리 정보 등을 저장</li>
+<li>컨텍스트 스위칭은 매우 자주일어나고 오버헤드등으로 지연될 경우 성능 전체에 영향을 주기 때문에 동작이 어셈블리어로 작성되어 있음</li>
+</ul>
+<h2>프로세스간 커뮤니케이션</h2>
+<ul>
+<li>프로세스간의 공간은 완전히 분리되어 있음</li>
+<li>다른 프로세스간의 상호 접근하는 방법은 보안상의 이유로 제공되지 않음</li>
+<li>필요한 경우 프로세스간의 통신을 할 수 있는 IPC(InterProcess Communication)라는 방법을 제공함</li>
+</ul>
+<h4>fork() 시스템 콜</h4>
+<ul>
+<li>fork() 시스템 콜을 통해 하나의 프로세스를 복사하여 새로운 프로세스를 만들 수 있음</li>
+<li>복사된 프로세스와 통신하기 위해서는 IPC를 사용해야 함</li>
+</ul>
+<h4>프로세스간 통신이 필요한 이유</h4>
+<ul>
+<li>하나의 프로그램을 다수의 프로세스를 사용해 구동시켜 효율적으로 프로세서를 사용할 수 있게됨 (멀티코어 프로세스에서 각 코어별로 프로세스를 병렬로 동작)</li>
+<li>이 때 다른 코어에서 작동하는 프로세스간의 상태 확인 및 데이터 송수신이 필요</li>
+</ul>
+<h4>프로세스 가상메모리의 커널영역</h4>
+<ul>
+<li>각 프로세스는 가상메모리로 4GB씩 할당받는다. 이는 실제 물리메모리에 올라가는 크기가 아니라 프로세스 내에서 활용할 수 있는 공간을 가상으로 할당한 영역이다.</li>
+<li>이 때 0<del>3GB는 프로세스가 사용하는 공간 3</del>4GB는 운영체제 커널이 할당된 공간이다</li>
+<li>커널 영역은 실제 물리메모리에 올라갈 때 모든 프로세스가 같은 공간을 공유하게 되어있음</li>
+<li>이 영역을 활용해서 IPC가 가능</li>
+</ul>
+<h3>IPC 기법</h3>
+<h4>파일을 사용한 커뮤니케이션</h4>
+<ul>
+<li>각 프로세스 별로 처리한 내용을 파일에 저장해서 공유하는 방법</li>
+<li>실시간으로 원하는 프로세스에 전달하기 어려움</li>
+<li>저장매체를 사용하기 때문에 효율이 떨어짐</li>
+<li>커널영역을 사용하지 않는 방법으로 사용성이 매우 떨어짐</li>
+</ul>
+<h4>Pipe</h4>
+<ul>
+<li>fork()를 통해 복사된 프로세스를 향해 단방향으로 데이터를 전달할 수 있음</li>
+<li>pipe() 시스템 콜에 배열을 전달하면 배열의 1번 인덱스에 작성한 내용을 0번 인덱스에서 읽을 수 있음
+<ul>
+<li>단방향 통신이기 때문에 1에서 작성해서 0에서 읽는 건 가능하나, 0에서 작성해서 1로(역방향) 가는 것은 불가능하다</li>
+</ul>
+</li>
+</ul>
+<h4>메세지 큐 (Message Queue)</h4>
+<ul>
+<li>모든 프로세스 사이에서 양방향으로 데이터를 통신할 수 있음</li>
+<li>FIFO 정책을 기반으로 데이터를 enqueue, dequeue하여 프로세스간 통신한다</li>
+<li>메세지 큐를 생성하고 해당 큐의 key를 프로세스간에 공유하면 key를 통해 해당 큐에 접근할 수 있음</li>
+</ul>
+<h4>공유 메모리 (Shared Memory)</h4>
+<ul>
+<li>커널에 대놓고 메모리 영역을 만들고 해당 영역을 변수처럼 사용하는 방식</li>
+<li>해당 공유 메모리의 key를 가지고 다수의 프로세스에서 접근할 수 있음</li>
 </ul></section><hr/><footer></footer></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/[CS]운영체제/">← <!-- -->[CS] 운영체제</a></li><li></li></ul></nav></main><footer>© <!-- -->2021</footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/[CS]프로세스/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-22d8e52467af59d6195e.js"],"app":["/app-9efc9f01be414ff97736.js"],"component---src-pages-404-js":["/component---src-pages-404-js-e3b7bf6b448cc0693d07.js"],"component---src-pages-about-js":["/component---src-pages-about-js-8f92fdbe885f42521337.js"],"component---src-pages-index-js":["/component---src-pages-index-js-bb4c07a3c58b24373d0e.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-38cea8ed3b546c66ff97.js"]};/*]]>*/</script><script src="/polyfill-22d8e52467af59d6195e.js" nomodule=""></script><script src="/component---src-templates-blog-post-js-38cea8ed3b546c66ff97.js" async=""></script><script src="/commons-92247d2d2a91ce365536.js" async=""></script><script src="/app-9efc9f01be414ff97736.js" async=""></script><script src="/framework-de777ff0ab3a85d108fd.js" async=""></script><script src="/webpack-runtime-91e26ca927397cd9e11f.js" async=""></script></body></html>

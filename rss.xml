@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 23 Aug 2021 03:56:00 GMT</lastBuildDate><item><title><![CDATA[[CS] 프로세스]]></title><description><![CDATA[계속 추가중 스케쥴러 배치 처리 시스템 시스템이 여러개의 프로그램을 순차적으로 처리하는 방식 Queue…]]></description><link>https://kimjeongwonn.github.io/[CS]프로세스/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]프로세스/</guid><pubDate>Tue, 17 Aug 2021 08:29:30 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 24 Aug 2021 10:17:46 GMT</lastBuildDate><item><title><![CDATA[[CS] 프로세스]]></title><description><![CDATA[계속 추가중 스케쥴러 배치 처리 시스템 시스템이 여러개의 프로그램을 순차적으로 처리하는 방식 Queue…]]></description><link>https://kimjeongwonn.github.io/[CS]프로세스/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]프로세스/</guid><pubDate>Tue, 17 Aug 2021 08:29:30 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;계속 추가중&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;스케쥴러&lt;/h2&gt;
@@ -334,6 +334,60 @@
 &lt;ul&gt;
 &lt;li&gt;커널에 대놓고 메모리 영역을 만들고 해당 영역을 변수처럼 사용하는 방식&lt;/li&gt;
 &lt;li&gt;해당 공유 메모리의 key를 가지고 다수의 프로세스에서 접근할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;시그널 (Signal)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;유닉스에서 30년 이상 사용하고 있는 커널 또는 프로세스에서 다른 프로세스로 이벤트 발생을 알려주는 기법&lt;/li&gt;
+&lt;li&gt;프로세스 관련 코드에 미리 시그널 핸들러를 등록하고 시그널을 받으면 해당 시그널 핸들러를 실행
+&lt;ul&gt;
+&lt;li&gt;프로그램에서 특정 시그널에 대한 동작을 임의로 지정해 줄 수 있음
+&lt;ul&gt;
+&lt;li&gt;해당 시그널을 무시&lt;/li&gt;
+&lt;li&gt;시그널 블록과 언블록을 통해 지연전달&lt;/li&gt;
+&lt;li&gt;특정 동작을 핸들러로 등록해서 임의로 지정&lt;/li&gt;
+&lt;li&gt;별도로 지정하지 않으면 커널의 기본 동작 수행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;지정되지 않는 시그널을 받으면 기본적으로 지정된 핸들러가 동작&lt;/li&gt;
+&lt;li&gt;프로세스의 PCB 내부에 해당 프로세스에서 블록된 혹은 처리해야하는 시그널에 관련 정보를 관리함&lt;/li&gt;
+&lt;li&gt;커널모드에서 사용자모드로 전환 할 때 PCB의 대기중인 시그널을 확인해 커널모드를 유지하는 경우도 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;소켓 (Socket)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;서버와 클라이언트 등 두개의 다른 컴퓨터간 네트워크 기반 통신을 위한 기술&lt;/li&gt;
+&lt;li&gt;소켓을 시스템 콜로 사용해 하나의 컴퓨터 안에서 두 개의 프로세스간의 통신 기법으로 활용할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;마무리&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;하나의 코드를 실행하게 되면 다음의 단계를 따라 진행된다.
+&lt;ol&gt;
+&lt;li&gt;프로세스 생성 후 NEW 상태로 변경&lt;/li&gt;
+&lt;li&gt;메모리에 스택, 힙, 데이터(BBS, DATA), 코드 영역이 할당&lt;/li&gt;
+&lt;li&gt;소스코드 텍스트가 코드 영역에 입력&lt;/li&gt;
+&lt;li&gt;전역 변수를 데이터 영역에 입력&lt;/li&gt;
+&lt;li&gt;프로세의 상태를 READY 상태로 전환&lt;/li&gt;
+&lt;li&gt;스케쥴러에 의해 컨텍스트 스위칭이 일어나 RUNNING 상태로 전환&lt;/li&gt;
+&lt;li&gt;프로세스의 PCB를 불러와서 PC와 SP를 초기화&lt;/li&gt;
+&lt;li&gt;코드의 메인함수를 실행 → SP를 EBP에 저장, 다음 SP에 리턴 주소를 할당&lt;/li&gt;
+&lt;li&gt;함수내의 지역변수를 스택에 입력&lt;/li&gt;
+&lt;li&gt;함수내의 시스템 콜이 일어나게 되면 다음의 단계를 따라 진행된다.
+&lt;ol&gt;
+&lt;li&gt;시스템 콜의 번호와 시스템 콜의 인자를 EAX, EBX에 저장한 뒤, 0x80 주소로 시스템 콜 인터럽트를 실행&lt;/li&gt;
+&lt;li&gt;CPU의 모드가 커널 모드로 변경&lt;/li&gt;
+&lt;li&gt;IDT에서 0x80에 해당하는 주소의 함수를 찾아서 호출&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;system_call&lt;/code&gt;함수에서 EAX에 저장된 시스템 콜의 번호를 찾아서, 해당 번호에 맞는 시스템 콜 함수로 이동&lt;/li&gt;
+&lt;li&gt;해당 시스템 콜 함수를 실행한 뒤, 다시 사용자 모드로 변경하고 프로세스의 다음 코드 진행&lt;/li&gt;
+&lt;li&gt;만약 시스템 콜 함수에 대기가 필요하다면 프로세스의 상태를 WAITING으로 변경 한다&lt;/li&gt;
+&lt;li&gt;시스템 콜의 처리가 끝나면 인터럽트를 통해 WAITING된 프로세스를 READY상태로 바꿔준다&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;함수가 종료하게 될 때 반환값이 있다면 프로세스 레지스터의 EAX에 저장한 뒤 스택을 모두 POP한다.&lt;/li&gt;
+&lt;li&gt;리턴 어드레스를 POP하게 되면 해당 주소의 코드를 실행하고 만약 반환값을 사용한다면 EAX에 저장된 값을 사용한다&lt;/li&gt;
+&lt;li&gt;프로세스가 종료하게 되면 프로세스의 상태를 TERMINATED로 변경하고 종료한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[[CS] 운영체제]]></title><description><![CDATA[운영체제 사용자는 응용프로그램을 이용해 원하는 작업을 실행 이 때 응용프로그램이 작업을 수행하기 위해서 시스템 자원을 요청. 운영체제는 응용프로그램이 요청한 시스템 자원을 효율적으로 분배하여 제공/회수한다. Interface…]]></description><link>https://kimjeongwonn.github.io/[CS]운영체제/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]운영체제/</guid><pubDate>Mon, 16 Aug 2021 09:20:05 GMT</pubDate><content:encoded>&lt;h2&gt;운영체제&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;사용자는 응용프로그램을 이용해 원하는 작업을 실행&lt;/li&gt;

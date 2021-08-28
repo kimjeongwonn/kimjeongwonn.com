@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 26 Aug 2021 12:16:09 GMT</lastBuildDate><item><title><![CDATA[[CS] 스레드]]></title><description><![CDATA[Light Weight Process 라고 부르기도 함 → 프로세스 처럼 동작하지만 더 가볍고 작음 프로세스는 기본적으로 직접적으로 데이터 접근이 불가능 → IPC…]]></description><link>https://kimjeongwonn.github.io/[CS]스레드/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]스레드/</guid><pubDate>Thu, 26 Aug 2021 12:15:53 GMT</pubDate><content:encoded>&lt;ul&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 28 Aug 2021 06:46:54 GMT</lastBuildDate><item><title><![CDATA[[CS] 스레드]]></title><description><![CDATA[Light Weight Process 라고 부르기도 함 → 프로세스 처럼 동작하지만 더 가볍고 작음 프로세스는 기본적으로 직접적으로 데이터 접근이 불가능 → IPC…]]></description><link>https://kimjeongwonn.github.io/[CS]스레드/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]스레드/</guid><pubDate>Thu, 26 Aug 2021 12:15:53 GMT</pubDate><content:encoded>&lt;ul&gt;
 &lt;li&gt;Light Weight Process 라고 부르기도 함 → 프로세스 처럼 동작하지만 더 가볍고 작음&lt;/li&gt;
 &lt;li&gt;프로세스는 기본적으로 직접적으로 데이터 접근이 불가능 → IPC 기법을 활용해 간접적으로 데이터 통신을 사용&lt;/li&gt;
 &lt;li&gt;스레드는 하나의 프로세스 안에서 생성되며 다수의 스레드 생성 가능&lt;/li&gt;
@@ -44,8 +44,69 @@
 &lt;/ul&gt;
 &lt;h2&gt;동기화 이슈&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;다수의 스레드 사이의 실행 순서는 보장되지 않기 때문에 공유된 변수를 사용할 때 예측하지 못한 동작이 일어날 수 있음&lt;/li&gt;
-&lt;li&gt;그렇기 때문에 스레드를 별도로 관리해서 동기화 이슈를 처리해야 함&lt;/li&gt;
+&lt;li&gt;다수의 스레드 사이의 실행 순서는 보장되지 않기 때문에 공유된 공간의 변수를 사용할 때 예측하지 못한 동작이 일어날 수 있음
+&lt;ul&gt;
+&lt;li&gt;코드가 실행될 때 어셈블리어 레벨의 연산 중간에 컨텍스트 스위칭이 일어나게 되면 연산이 누락되는 등의 문제가 발생할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;때문에 다양한 방법을 통해 스레드의 작업 순서를 맞춰 동기화에 문제가 없게 해야함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Mutual Exclusion (상호 배제)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;스레드에서 하나의 연산을 하나의 스레드가 끝낼 때 까지 다른 스레드에서 접근하지 못하도록 방지하는 기법&lt;/li&gt;
+&lt;li&gt;하나의 연산을 점유하고 있는 스레드가 중간에 컨텍스트 스위칭이 일어나 다른 스레드에서 같은 연산을 처리할 때 이미 점유중인 스레드가 있다면 해당 스레드는 점유가 끝날 때 까지 대기함&lt;/li&gt;
+&lt;li&gt;스레드에서 반드시 한 번에 처리되어야 하는 임계영역을 지정하여 임계자원의 동기화를 보장할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Mutex와 Semaphore(세마포어)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Mutex(Binary Semaphore)
+&lt;ul&gt;
+&lt;li&gt;임계구역에 하나의 스레드만 들어갈 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Semaphore
+&lt;ul&gt;
+&lt;li&gt;임계구역 내에 다수의 스레드가 들어갈 수 있음&lt;/li&gt;
+&lt;li&gt;Counter를 통해 리소스에 접근할 수 있는 허용 가능한 스레드 수를 제어&lt;/li&gt;
+&lt;li&gt;바쁜 대기 → 임계구역에 접근하지 못하도록 스레드 내에서 Counter 값을 조건으로 임계구역 앞에서 무한 Loop를 돌려 접근을 방지시킴&lt;/li&gt;
+&lt;li&gt;대기 큐 → 운영체제 기술로 해당 스레드의 상태를 ready상태에서 대기 상태로 바꾸거나 스케쥴러의 대기 큐에 할당하여 접근을 방지시킴
+&lt;ul&gt;
+&lt;li&gt;세마포어를 구현해 놓은 시스템 API 함수가 있음 → POSIX 세마포어
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;sem_open()&lt;/code&gt; : 세마포어 생성&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;sem_wait()&lt;/code&gt; : 임계영역 접근 전 세마포어 상태를 확인해 세마포어를 잠그거나 풀릴 때 까지 대기&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;sem_post()&lt;/code&gt; : 임계영역에 대한 접근이 끝나고 세마포어의 잠금을 해제&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Deadlock(교착상태)와 Starvation(기아상태)&lt;/h3&gt;
+&lt;h4&gt;교착상태(Deadlock)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;무한 대기 상태 : 두 개 이상의 작업이 서로 작업이 끝나야 진행할 수 있는 상태에서 대기하게 되어 진행이 되지 않는 상태&lt;/li&gt;
+&lt;li&gt;교착 상태가 발생하는 조건 4가지
+&lt;ul&gt;
+&lt;li&gt;Mutual exclusion (상호 배제) : 프로세스들이 필요로 하는 자원에 대해 배타적인 통제권을 요구&lt;/li&gt;
+&lt;li&gt;Hold and wait (점유 대기) : 프로세스가 할당된 자원을 가진 상태에서 다른 자원을 기다림&lt;/li&gt;
+&lt;li&gt;No preemption (비선점) : 프로세스가 어떤 자원의 사용을 끝내기 전까지 그 자원을 선점할 수 없음&lt;/li&gt;
+&lt;li&gt;Circular wait (순환 대기) : 각 프로세스는 순환적으로 다음 프로세스가 요구하는 자원을 갖고 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;위의 네가지 조건 중에 하나를 예방/해결하는 방법으로 교착상태를 방지할 수있다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;기아상태(Starvation)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;특정 프로세스(스레드)의 우선순위가 낮아서 원하는 자원을 계속 할당 받지 못하는 상태&lt;/li&gt;
+&lt;li&gt;교착상태와 차이 → 교착상태는 여러 프로세스가 동일 자원 점유를 요청할 때 발생, 기아상태는 여러 프로세스가 작원을 점유할 때, 우선순위가 낮은 프로세스가 영원히 자원 할당이 되지 않는 경우를 의미&lt;/li&gt;
+&lt;li&gt;우선순위를 수시로 변경해서 해결
+&lt;ul&gt;
+&lt;li&gt;오래 기다린 프로세스의 우선순위를 높여주기&lt;/li&gt;
+&lt;li&gt;우선순위가 아니라 Queue방식으로 처리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[[CS] 프로세스]]></title><description><![CDATA[스케쥴러 배치 처리 시스템 시스템이 여러개의 프로그램을 순차적으로 처리하는 방식 Queue 자료구조와 비슷한 방식으로 동작 하나의 프로그램이 실행되는 동안 다른 작업을 하지 못함 → 한 번에 하나의 프로그램 처리만 가능 멀티 태스킹 단일 CPU…]]></description><link>https://kimjeongwonn.github.io/[CS]프로세스/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]프로세스/</guid><pubDate>Tue, 17 Aug 2021 08:29:30 GMT</pubDate><content:encoded>&lt;h2&gt;스케쥴러&lt;/h2&gt;
 &lt;h3&gt;배치 처리 시스템&lt;/h3&gt;
 &lt;ul&gt;

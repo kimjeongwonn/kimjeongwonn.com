@@ -1,4 +1,100 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 02 Sep 2021 11:48:10 GMT</lastBuildDate><item><title><![CDATA[[CS] 가상메모리]]></title><description><![CDATA[리눅스에서 하나의 프로세스에 할당하는 메모리는 4GB정도 하지만 통상 시스템 물리 메모리는 8GB~32GB 정도 프로세스당 할당된 메모리는 4GB이지만 프로세스가 실제로 동작할 때 참조하는 메모리는 제한적 CPU…]]></description><link>https://kimjeongwonn.github.io/[CS]가상메모리/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]가상메모리/</guid><pubDate>Mon, 30 Aug 2021 11:11:09 GMT</pubDate><content:encoded>&lt;ul&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[kimjeongwonn]]></title><description><![CDATA[김정원의 프론트엔드 기술블로그]]></description><link>https://kimjeongwonn.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 03 Sep 2021 10:57:26 GMT</lastBuildDate><item><title><![CDATA[[CS] 파일 시스템]]></title><description><![CDATA[운영체제가 저장매체에 파일을 읽고 쓰기 위한 자료구조 / 알고리즘 파일 시스템이 필요한 이유 데이터를 저장매체에서 관리하는데에 0과…]]></description><link>https://kimjeongwonn.github.io/[CS]파일-시스템/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]파일-시스템/</guid><pubDate>Fri, 03 Sep 2021 10:57:11 GMT</pubDate><content:encoded>&lt;ul&gt;
+&lt;li&gt;운영체제가 저장매체에 파일을 읽고 쓰기 위한 자료구조 / 알고리즘&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;파일 시스템이 필요한 이유&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터를 저장매체에서 관리하는데에 0과 1로 이루어진 비트를 단위로 관리하기에 오버헤드가 너무 큼&lt;/li&gt;
+&lt;li&gt;때문에 데이터를 블록단위로 묶어서 관리하기로 함 (보통 4KB)&lt;/li&gt;
+&lt;li&gt;블록마다 고유 번호를 부여해서 관리&lt;/li&gt;
+&lt;li&gt;그러나 사용자가 블록의 고유번호를 관리하는 것은 불가능
+&lt;ul&gt;
+&lt;li&gt;사용자가 접근하기 쉬운 추상적인 객체로 묶어서 관리 → 파일&lt;/li&gt;
+&lt;li&gt;각 파일 안에서는 데이터가 블록단위로 관리됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;저장매체에 파일을 효율적으로 저장하기 위해서는 가능한 연속적인 공간에 파일을 저장해야 함
+&lt;ul&gt;
+&lt;li&gt;그러나 외부 단편화 문제, 파일 사이즈 변경 문제로 연속적인 공간을 보장할 수 없기 때문에 불연속 공간에서 파일을 저장하는 방법이 필요&lt;/li&gt;
+&lt;li&gt;블록 체이닝 : 각 블록을 링크드 리스트로 연결 → 파일을 탐색하기 위해 항상 첫 번째 블록부터 주소를 따라가서 탐색해야 하는 단점&lt;/li&gt;
+&lt;li&gt;인덱스 블록 : 각 블록에 대한 위치 정보(주소)를 기록해서 한 번에 블록을 찾아갈 수 있도록 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;다양한 파일 시스템&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Window : FAT, FAT32, NTFS
+&lt;ul&gt;
+&lt;li&gt;블록 위치를 FAT라는 자료구조에 기록&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;리눅스(UNIX) : ext2, ext3, ext4
+&lt;ul&gt;
+&lt;li&gt;인덱스 블록의 일종인 inode 방식을 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;파일 시스템과 시스템 콜&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;파일 시스템이 다르더라도 하나의 시스템콜을 통해서 지원되도록 구현되어 있음&lt;/li&gt;
+&lt;li&gt;시스템 콜을 통해 저장매체에 접근하게 되면 운영체제에서 파일 시스템에 맞게끔 동작하게 됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;inode 파일 시스템 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;수퍼 블록 : 파일 시스템에 대한 정보
+&lt;ul&gt;
+&lt;li&gt;파일 시스템의 정보와 파티션에 대한 정보를 갖고 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;아이노드 블록 : 파일 상세 정보 → 프로세스의 PCB와 비슷한 역할
+&lt;ul&gt;
+&lt;li&gt;파일별로 inode를 하나씩 갖고 있으며 각 inode는 식별자를 갖음 → inode 식별자로 실제 데이터에 접근할 수 있음&lt;/li&gt;
+&lt;li&gt;파일 시스템 내부에서는 inode를 기반으로 파일을 엑세스 함&lt;/li&gt;
+&lt;li&gt;inode 기반 메타 데이터들을 저장하고 있음
+&lt;ul&gt;
+&lt;li&gt;파일 접근 권한&lt;/li&gt;
+&lt;li&gt;소유자 정보&lt;/li&gt;
+&lt;li&gt;파일 사이즈&lt;/li&gt;
+&lt;li&gt;생성 시간, 수정 시간&lt;/li&gt;
+&lt;li&gt;데이터의 위치 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;다이렉트 블록안에 실제 데이터 블록의 주소를 보관할 수 있는 공간
+&lt;ul&gt;
+&lt;li&gt;다이렉트 블록은 보통 12개&lt;/li&gt;
+&lt;li&gt;실제 데이터 블록은 12개를 훨씬 상이하는 경우가 많음&lt;/li&gt;
+&lt;li&gt;추가적인 데이터 블록의 주소는 인다이렉트 블록안에 저장되며&lt;/li&gt;
+&lt;li&gt;재귀적으로 데이터 블록의 주소를 저장할 수 있음
+&lt;ul&gt;
+&lt;li&gt;싱글 → 더블 → 트리플&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;다이렉트 블록의 사이즈에 따라서 파일 하나당 최대 사이즈가 달라짐&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;데이터 블록 : 실제 데이터&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;가상 파일 시스템 (Virtual File System)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;파일 시스템 관리를 추상화하는 기법&lt;/li&gt;
+&lt;li&gt;네트워크 등 다양한 기기에서 동일한 파일 시스템 인터페이스를 통해 관리할 수 있도록 하는 방법&lt;/li&gt;
+&lt;li&gt;하나의 시스템콜을 기기별로 알맞은 read_spec/write_spec 코드를 구현&lt;/li&gt;
+&lt;li&gt;이를 통해 모두 다른 디바이스 / 파일시스템도 같은 동일한 인터페이스로 사용 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;디바이스의 종류&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;블록 디바이스 (Block Device)
+&lt;ul&gt;
+&lt;li&gt;HDD, CD/DVD와 같이 블록 혹은 섹터 등 정해진 단위로 데이터를 송수신, IO 송수신 속도가 높음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;캐릭터 디바이스 (Character Device)
+&lt;ul&gt;
+&lt;li&gt;키보드, 마우스 등 Byte 단위 데이터 전송, IO 송수신 속도가 낮음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[[CS] 가상메모리]]></title><description><![CDATA[리눅스에서 하나의 프로세스에 할당하는 메모리는 4GB정도 하지만 통상 시스템 물리 메모리는 8GB~32GB 정도 프로세스당 할당된 메모리는 4GB이지만 프로세스가 실제로 동작할 때 참조하는 메모리는 제한적 CPU…]]></description><link>https://kimjeongwonn.github.io/[CS]가상메모리/</link><guid isPermaLink="false">https://kimjeongwonn.github.io/[CS]가상메모리/</guid><pubDate>Mon, 30 Aug 2021 11:11:09 GMT</pubDate><content:encoded>&lt;ul&gt;
 &lt;li&gt;리눅스에서 하나의 프로세스에 할당하는 메모리는 4GB정도&lt;/li&gt;
 &lt;li&gt;하지만 통상 시스템 물리 메모리는 8GB~32GB 정도&lt;/li&gt;
 &lt;li&gt;프로세스당 할당된 메모리는 4GB이지만 프로세스가 실제로 동작할 때 참조하는 메모리는 제한적&lt;/li&gt;

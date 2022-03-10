@@ -29,7 +29,7 @@ const Layout = ({ children, years = [] }: Props) => {
           setIsExtendsHeader(false);
           lastScrollY = scrollY;
         }
-        if (scrollY < lastScrollY - 30) {
+        if (scrollY < lastScrollY) {
           setIsExtendsHeader(true);
           lastScrollY = scrollY;
         }

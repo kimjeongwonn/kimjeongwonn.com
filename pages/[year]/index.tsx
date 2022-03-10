@@ -1,4 +1,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import List from 'src/components/List/List';
 import { getPostList, getYears } from 'src/lib/getStaticData';
 import { PostI } from 'src/types/post';
@@ -8,7 +10,13 @@ interface Props {
 }
 
 const Year: NextPage<Props> = ({ postList }) => {
-  return <List posts={postList} />;
+  const router = useRouter();
+  return (
+    <>
+      <NextSeo title={String(router.query.year)} />
+      <List posts={postList} />
+    </>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths<{ year: string }> = async () => {

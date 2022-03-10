@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 import List from 'src/components/List/List';
-import { getPostList } from 'src/lib/getStaticData';
+import { getPostList, getYears } from 'src/lib/getStaticData';
 import { PostI } from 'src/types/post';
 
 interface Props {
@@ -15,7 +15,8 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   const postList = getPostList();
   return {
     props: {
-      postList
+      postList,
+      years: getYears()
     }
   };
 };

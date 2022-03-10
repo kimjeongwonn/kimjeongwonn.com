@@ -44,7 +44,7 @@ export const PostContent = styled.section(
     color: ${theme.colors.primaryColor};
     font-size: 16px;
     line-height: 1.8;
-    text-align: justify;
+    word-break: keep-all;
     overflow-wrap: break-word;
 
     hr {
@@ -127,6 +127,7 @@ export const PostContent = styled.section(
       background-color: ${theme.colors.gray[200]};
       border-radius: 4px;
       line-height: 1.5;
+      overflow-x: auto;
 
       code {
         all: unset;

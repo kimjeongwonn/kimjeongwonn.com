@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { LayoutContainer, LayoutMain } from './Layout.styled';
+import {
+  LayoutContainer,
+  LayoutHeaderButton,
+  LayoutMain,
+  YearsContainer,
+  YearsItem
+} from './Layout.styled';
 import LayoutHeader from './LayoutHeader';
 import throttle from 'lodash/throttle';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface Props {
   children: React.ReactNode;
+  years: number[];
 }
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children, years = [] }: Props) => {
   const [isExtendsHeader, setIsExtendsHeader] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     let lastScrollY = 0;
@@ -37,7 +47,19 @@ const Layout = ({ children }: Props) => {
 
   return (
     <LayoutContainer>
-      <LayoutHeader extended={isExtendsHeader} />
+      <LayoutHeader extended={isExtendsHeader} years={years} />
+      <YearsContainer>
+        {years.map(year => {
+          const activeYear = String(router.query.year) === String(year);
+          return (
+            <YearsItem key={year} active={activeYear}>
+              <Link passHref href={activeYear ? '/' : `/${year}`} scroll={false}>
+                <LayoutHeaderButton>{year}</LayoutHeaderButton>
+              </Link>
+            </YearsItem>
+          );
+        })}
+      </YearsContainer>
       <LayoutMain>{children}</LayoutMain>
     </LayoutContainer>
   );

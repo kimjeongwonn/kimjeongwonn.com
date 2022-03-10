@@ -5,6 +5,7 @@ export const LayoutContainer = styled.div(
   ({ theme }) => css`
     max-width: 768px;
     min-height: 100vh;
+    position: relative;
     display: flex;
     flex-direction: column;
     border-left: 1px solid ${theme.colors.primaryColor};
@@ -23,11 +24,10 @@ export const LayoutHeaderContainer = styled.header<{ extended?: boolean }>(
     position: sticky;
     top: 0;
     padding: 20px;
-    padding-top: 50px;
     border-bottom: 1px solid ${theme.colors.primaryColor};
     background-color: ${theme.colors.background};
     user-select: none;
-    transform: translateY(${extended ? '0px' : '-40px'});
+    transform: translateY(${extended ? '0px' : '-100%'});
 
     transition: transform 0.4s;
   `
@@ -36,7 +36,7 @@ export const LayoutHeaderContainer = styled.header<{ extended?: boolean }>(
 export const LayoutHeaderTitle = styled.h1(
   ({ theme }) => css`
     font-family: JetBrains Mono;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 18px;
     color: ${theme.colors.primaryColor};
     line-height: 1;
@@ -58,6 +58,23 @@ export const LayoutHeaderButton = styled.button(
     cursor: pointer;
     width: max-content;
   `
+);
+
+export const YearsContainer = styled.ul(
+  ({}) => css`
+    position: fixed;
+    top: 20px;
+    right: 20px;
+  `
+);
+export const YearsItem = styled.li<{ active: boolean }>(
+  ({ active }) =>
+    active &&
+    css`
+      button {
+        font-weight: 700;
+      }
+    `
 );
 
 export const LayoutMain = styled.main(({}) => css``);

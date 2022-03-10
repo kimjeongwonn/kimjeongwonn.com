@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Post from 'src/components/Post/Post';
-import { getPostData, getPostList } from 'src/lib/getStaticData';
+import { getPostData, getPostList, getYears } from 'src/lib/getStaticData';
 
 export interface PostPageProps {
   title: string;

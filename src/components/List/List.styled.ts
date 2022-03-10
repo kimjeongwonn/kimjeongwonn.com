@@ -15,7 +15,6 @@ export const ListItemTitle = styled.h3(
   ({ theme }) => css`
     font-size: 16px;
     font-weight: 700;
-    margin-bottom: 10px;
   `
 );
 
@@ -30,5 +29,6 @@ export const ListItemTime = styled.time(
 export const ListItemExcerpt = styled.p(
   ({ theme }) => css`
     font-size: 12px;
+    margin-top: 10px;
   `
 );

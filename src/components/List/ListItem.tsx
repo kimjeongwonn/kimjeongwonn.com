@@ -16,7 +16,7 @@ const ListItem = ({ item }: Props) => {
       <ListItemContainer>
         <ListItemTime>{dayjs(createAt).format('YYYY/MM/DD')}</ListItemTime>
         <ListItemTitle>{title}</ListItemTitle>
-        <ListItemExcerpt>{excerpt}</ListItemExcerpt>
+        {excerpt && <ListItemExcerpt>{excerpt}</ListItemExcerpt>}
       </ListItemContainer>
     </Link>
   );

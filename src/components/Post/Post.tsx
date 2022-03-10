@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import 'highlight.js/styles/github.css';
 import { PostPageProps } from 'pages/[year]/[slug]';
 import React from 'react';
 import {

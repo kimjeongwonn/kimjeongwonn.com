@@ -29,16 +29,14 @@ const Layout = ({ children, years = [] }: Props) => {
 
     const scrollHandler = throttle(() => {
       const scrollY = window.scrollY;
-      console.log(scrollY);
-      console.log(maxScrollY);
       if (scrollY < 0 || scrollY > maxScrollY) {
         return;
       }
-      if (scrollY > lastScrollY) {
+      if (scrollY > lastScrollY + 10) {
         setIsExtendsHeader(false);
         lastScrollY = scrollY;
       }
-      if (scrollY < lastScrollY) {
+      if (scrollY < lastScrollY - 10) {
         setIsExtendsHeader(true);
         lastScrollY = scrollY;
       }

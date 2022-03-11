@@ -24,7 +24,7 @@ const Layout = ({ children, years = [] }: Props) => {
     let lastScrollY = 0;
     let maxScrollY = Number.MAX_SAFE_INTEGER;
     const resizeHandler = throttle(() => {
-      maxScrollY = window.document.body.scrollHeight - window.innerHeight;
+      maxScrollY = window.document.body.scrollHeight - window.visualViewport.height;
     }, 500);
 
     const scrollHandler = throttle(
@@ -47,7 +47,7 @@ const Layout = ({ children, years = [] }: Props) => {
     );
 
     window.addEventListener('scroll', scrollHandler);
-    window.addEventListener('resize', resizeHandler);
+    window.visualViewport.addEventListener('resize', resizeHandler);
 
     return () => {
       window.removeEventListener('scroll', scrollHandler);

@@ -22,36 +22,34 @@ const Layout = ({ children, years = [] }: Props) => {
 
   useEffect(() => {
     let lastScrollY = 0;
-    let maxScrollY = Number.MAX_SAFE_INTEGER;
+    let maxScrollY = window.document.body.scrollHeight - window.visualViewport.height - 1;
     const resizeHandler = throttle(() => {
-      maxScrollY = window.document.body.scrollHeight - window.visualViewport.height;
+      maxScrollY = window.document.body.scrollHeight - window.visualViewport.height - 1;
     }, 500);
 
-    const scrollHandler = throttle(
-      () => {
-        const scrollY = window.scrollY;
-        if (scrollY < 0 || scrollY > maxScrollY) {
-          return;
-        }
-        if (scrollY > lastScrollY) {
-          setIsExtendsHeader(false);
-          lastScrollY = scrollY;
-        }
-        if (scrollY < lastScrollY) {
-          setIsExtendsHeader(true);
-          lastScrollY = scrollY;
-        }
-      },
-      250,
-      { leading: false }
-    );
+    const scrollHandler = throttle(() => {
+      const scrollY = window.scrollY;
+      console.log(scrollY);
+      console.log(maxScrollY);
+      if (scrollY < 0 || scrollY > maxScrollY) {
+        return;
+      }
+      if (scrollY > lastScrollY) {
+        setIsExtendsHeader(false);
+        lastScrollY = scrollY;
+      }
+      if (scrollY < lastScrollY) {
+        setIsExtendsHeader(true);
+        lastScrollY = scrollY;
+      }
+    }, 250);
 
     window.addEventListener('scroll', scrollHandler);
     window.visualViewport.addEventListener('resize', resizeHandler);
 
     return () => {
       window.removeEventListener('scroll', scrollHandler);
-      window.removeEventListener('resize', resizeHandler);
+      window.visualViewport.addEventListener('resize', resizeHandler);
     };
   }, []);
 

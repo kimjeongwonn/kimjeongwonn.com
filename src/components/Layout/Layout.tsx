@@ -22,9 +22,17 @@ const Layout = ({ children, years = [] }: Props) => {
 
   useEffect(() => {
     let lastScrollY = 0;
+    let maxScrollY = Number.MAX_SAFE_INTEGER;
+    const resizeHandler = throttle(() => {
+      maxScrollY = window.document.body.scrollHeight - window.innerHeight;
+    }, 500);
+
     const scrollHandler = throttle(
       () => {
         const scrollY = window.scrollY;
+        if (scrollY < 0 || scrollY > maxScrollY) {
+          return;
+        }
         if (scrollY > lastScrollY) {
           setIsExtendsHeader(false);
           lastScrollY = scrollY;
@@ -39,9 +47,11 @@ const Layout = ({ children, years = [] }: Props) => {
     );
 
     window.addEventListener('scroll', scrollHandler);
+    window.addEventListener('resize', resizeHandler);
 
     return () => {
       window.removeEventListener('scroll', scrollHandler);
+      window.removeEventListener('resize', resizeHandler);
     };
   }, []);
 
@@ -54,7 +64,7 @@ const Layout = ({ children, years = [] }: Props) => {
           return (
             <YearsItem key={year} active={activeYear}>
               <Link passHref href={activeYear ? '/' : `/${year}`} scroll={false}>
-                <LayoutHeaderButton>{year}</LayoutHeaderButton>
+                <LayoutHeaderButton as='a'>{year}</LayoutHeaderButton>
               </Link>
             </YearsItem>
           );

@@ -71,7 +71,7 @@ export const YearsItem = styled.li<{ active: boolean }>(
   ({ active }) =>
     active &&
     css`
-      button {
+      a {
         font-weight: 700;
       }
     `

@@ -13,11 +13,13 @@ const ListItem = ({ item }: Props) => {
 
   return (
     <Link href={`/${dayjs(createAt).get('year')}/${slug}`} passHref>
-      <ListItemContainer>
-        <ListItemTime>{dayjs(createAt).format('YYYY/MM/DD')}</ListItemTime>
-        <ListItemTitle>{title}</ListItemTitle>
-        {excerpt && <ListItemExcerpt>{excerpt}</ListItemExcerpt>}
-      </ListItemContainer>
+      <a>
+        <ListItemContainer>
+          <ListItemTime>{dayjs(createAt).format('YYYY/MM/DD')}</ListItemTime>
+          <ListItemTitle>{title}</ListItemTitle>
+          {excerpt && <ListItemExcerpt>{excerpt}</ListItemExcerpt>}
+        </ListItemContainer>
+      </a>
     </Link>
   );
 };

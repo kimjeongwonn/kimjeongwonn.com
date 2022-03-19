@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sitemap": "node scripts/sitemap.js"
+    "sitemap": "node scripts/sitemap_generator.js"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",

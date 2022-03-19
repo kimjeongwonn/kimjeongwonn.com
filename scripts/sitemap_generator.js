@@ -6,7 +6,7 @@ const matter = require('gray-matter');
 
 const getDate = new Date().toISOString();
 
-const YOUR_AWESOME_DOMAIN = 'https://kimjeongwonn.github.io';
+const YOUR_AWESOME_DOMAIN = 'https://kimjeongwonn.com';
 
 const formatted = sitemap => prettier.format(sitemap, { parser: 'html' });
 

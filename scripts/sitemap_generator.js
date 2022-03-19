@@ -11,17 +11,7 @@ const YOUR_AWESOME_DOMAIN = 'https://kimjeongwonn.github.io';
 const formatted = sitemap => prettier.format(sitemap, { parser: 'html' });
 
 (async () => {
-  const pages = await globby([
-    // include
-    'pages/**/*.tsx',
-    'pages/*.tsx',
-    // exclude
-    '!pages/_*.tsx'
-  ]);
-
   const posts = await globby('contents/*.md');
-
-  posts; //?
 
   const postsSitemap = `
     ${posts
@@ -59,5 +49,5 @@ const formatted = sitemap => prettier.format(sitemap, { parser: 'html' });
 
   const formattedSitemap = formatted(generatedSitemap);
 
-  fs.writeFileSync('out/sitemap-common.xml', formattedSitemap, 'utf8');
+  fs.writeFileSync('out/sitemap.xml', formattedSitemap, 'utf8');
 })();

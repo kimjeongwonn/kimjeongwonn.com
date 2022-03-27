@@ -78,3 +78,15 @@ export const YearsItem = styled.li<{ active: boolean }>(
 );
 
 export const LayoutMain = styled.main(({}) => css``);
+
+export const LayoutFooterContainer = styled.footer(
+  ({ theme }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 90px;
+    text-align: center;
+    border-top: 1px ${theme.colors.primaryColor} solid;
+  `
+);

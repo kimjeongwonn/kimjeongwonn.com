@@ -1,3 +1,6 @@
+import throttle from 'lodash/throttle';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import {
   LayoutContainer,
@@ -6,10 +9,8 @@ import {
   YearsContainer,
   YearsItem
 } from './Layout.styled';
+import LayoutFooter from './LayoutFooter';
 import LayoutHeader from './LayoutHeader';
-import throttle from 'lodash/throttle';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 interface Props {
   children: React.ReactNode;
@@ -67,6 +68,7 @@ const Layout = ({ children, years = [] }: Props) => {
         })}
       </YearsContainer>
       <LayoutMain>{children}</LayoutMain>
+      <LayoutFooter />
     </LayoutContainer>
   );
 };

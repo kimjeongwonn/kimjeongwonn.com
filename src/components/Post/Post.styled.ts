@@ -47,6 +47,10 @@ export const PostContent = styled.section(
     word-break: keep-all;
     overflow-wrap: break-word;
 
+    a {
+      text-decoration: underline;
+    }
+
     hr {
       border: none;
       border-bottom: 1px solid ${theme.colors.gray[300]};

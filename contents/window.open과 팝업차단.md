@@ -8,15 +8,31 @@ excerpt: '왜 팝업차단이 되는걸까'
 
 ### 왜 차단될까?
 
-브라우저에서 click 이벤트를 통해서 동작하는 open메서드는 신뢰할 수 있는 이벤트로 판단하고 팝업차단 없이 동작한다고 알고있었다. 그런데 찾아보니, 해당 이벤트 핸들러가 콜스택에서 사라진 이후에 비동기적으로 동작하게 되면 팝업 차단이 일어날 수 있다는 내용을 발견했다. 그래서 바로 `setTimeout` 메서드를 사용해서 콜스택이 비워진 다음 `window.open`메서드를 호출했지만 문제없이 동작했다. 테스트로 사용한 코드는 아래와 같았고 문제없이 동작했다. 그렇다면 비동기 호출이 문제가 아닌건데...
+브라우저에서 click 이벤트를 통해서 동작하는 open메서드는 신뢰할 수 있는 이벤트로 판단하고 팝업차단 없이 동작한다고 알고있었다. 그런데 찾아보니, 해당 이벤트 핸들러가 콜스택에서 사라진 이후에 비동기적으로 동작하게 되면 팝업 차단이 일어날 수 있다는 내용을 발견했다. 그래서 바로 `setTimeout` 메서드를 사용해서 콜스택이 비워진 다음 `window.open`메서드를 호출했지만 문제없이 동작했다. 테스트로 사용한 코드들은 아래와 같았고 모두 문제없이 동작했다. 그렇다면 비동기 호출이 문제가 아닌건데...
 
 ```js
+// 태스크큐에 전달
 const openNaverSite = () => {
   setTimeout(() => window.open('https://www.naver.com', '_blank'), 0);
 };
 const btn = document.querySelector('#btn');
 btn.addEventListener('click', () => {
   window.setTimeout(() => openNaverSite(), 0);
+});
+
+// 마이크로 태스크큐에 전달
+const openNaverSite = () => {
+  return new Promise(res => {
+    window.open('https://www.naver.com', '_blank');
+    res(true);
+  });
+};
+const btn = document.querySelector('#btn');
+btn.addEventListener('click', () => {
+  openNaverSite().then(() => {
+    window.open('https://www.naver.com', '_blank');
+    // 네이버 창이 두 개 연속으로 뜬다
+  });
 });
 ```
 

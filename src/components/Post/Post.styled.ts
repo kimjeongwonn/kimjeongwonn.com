@@ -121,14 +121,23 @@ export const PostContent = styled.section(
     blockquote {
       border-left: 4px solid ${theme.colors.gray[300]};
       line-height: 1.5;
-      padding: 4px 0;
+      margin: 16px 0;
       padding-left: 12px;
+
+      color: ${theme.colors.gray[600]};
+      font-size: 14px;
+
+      code {
+        font-size: 12px;
+        background-color: unset;
+        padding: 2px;
+      }
     }
 
     pre {
       font-family: JetBrains Mono, monospace;
       padding: 12px;
-      background-color: ${theme.colors.gray[200]};
+      background-color: ${theme.colors.gray['100']};
       border-radius: 4px;
       line-height: 1.5;
       overflow-x: auto;
@@ -143,7 +152,7 @@ export const PostContent = styled.section(
       font-family: JetBrains Mono, monospace;
       line-height: 1;
       padding: 2px 4px;
-      background-color: ${theme.colors.gray[200]};
+      background-color: ${theme.colors.gray['100']};
       border-radius: 4px;
       font-size: 14px;
       margin: 0 2px;

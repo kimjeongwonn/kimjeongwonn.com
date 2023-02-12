@@ -23,8 +23,8 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
       postList,
-      years: getYears()
-    }
+      years: getYears(),
+    },
   };
 };
 

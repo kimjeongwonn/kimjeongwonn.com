@@ -1,10 +1,10 @@
+import dayjs from 'dayjs';
 import fs from 'fs';
+import * as matter from 'gray-matter';
+import highlight from 'highlight.js';
+import MarkdownIt from 'markdown-it';
 import path from 'path';
 import { PostI } from '../types/post';
-import MarkdownIt from 'markdown-it';
-import highlight from 'highlight.js';
-import * as matter from 'gray-matter';
-import dayjs from 'dayjs';
 
 const md = new MarkdownIt({
   typographer: true,
@@ -15,7 +15,7 @@ const md = new MarkdownIt({
       } catch (__) {}
     }
     return '';
-  }
+  },
 });
 
 const contents: PostI[] = [];
@@ -35,7 +35,7 @@ contentFiles.forEach(fileName => {
     content: md.render(postRawData.content),
     createAt: (postRawData.data.date as Date).toISOString(),
     title: postRawData.data.title,
-    excerpt: postRawData.data.excerpt ?? postRawData.excerpt
+    excerpt: postRawData.data.excerpt ?? postRawData.excerpt,
   };
   contents.push(PostData);
   years.add(dayjs(postRawData.data.date).get('year'));
@@ -47,7 +47,9 @@ contents.sort((a, b) => {
 
 export const getPostList = (year?: string) => {
   if (year) {
-    return contents.filter(post => String(dayjs(post.createAt).get('year')) === year);
+    return contents.filter(
+      post => String(dayjs(post.createAt).get('year')) === year
+    );
   }
   return contents;
 };
@@ -65,6 +67,6 @@ export const getAbout = () => {
   const postRawData = matter.read(path.join(process.cwd(), 'about.md'));
   return {
     content: md.render(postRawData.content) ?? null,
-    title: postRawData.data.title ?? null
+    title: postRawData.data.title ?? null,
   };
 };

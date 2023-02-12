@@ -1,8 +1,12 @@
-import React from 'react';
 import dayjs from 'dayjs';
-import { PostI } from '../../types/post';
-import { ListItemContainer, ListItemExcerpt, ListItemTime, ListItemTitle } from './List.styled';
 import Link from 'next/link';
+import { PostI } from '../../types/post';
+import {
+  ListItemContainer,
+  ListItemExcerpt,
+  ListItemTime,
+  ListItemTitle,
+} from './List.styled';
 
 interface Props {
   item: PostI;

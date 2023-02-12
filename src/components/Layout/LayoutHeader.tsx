@@ -1,7 +1,10 @@
 import Link from 'next/link';
-import React from 'react';
 import { BLOG_TITLE } from '../../constant/meta';
-import { LayoutHeaderButton, LayoutHeaderContainer, LayoutHeaderTitle } from './Layout.styled';
+import {
+  LayoutHeaderButton,
+  LayoutHeaderContainer,
+  LayoutHeaderTitle,
+} from './Layout.styled';
 
 const LayoutHeader = ({ extended }: { extended: boolean; years: number[] }) => {
   return (

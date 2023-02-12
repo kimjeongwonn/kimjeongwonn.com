@@ -19,8 +19,8 @@ const AboutPage: NextPage<Props> = ({ about }: Props) => {
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      about: getAbout()
-    }
+      about: getAbout(),
+    },
   };
 };
 

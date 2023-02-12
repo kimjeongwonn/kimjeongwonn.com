@@ -16,7 +16,9 @@ const formatted = sitemap => prettier.format(sitemap, { parser: 'html' });
   const postsSitemap = `
     ${posts
       .map(post => {
-        const date = new Date(matter.read(path.join(__dirname, `../${post}`)).data.date);
+        const date = new Date(
+          matter.read(path.join(__dirname, `../${post}`)).data.date
+        );
         const postPath = post
           .replace('contents/', date.getFullYear() + '/')
           .replace('.md', '')

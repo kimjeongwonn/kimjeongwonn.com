@@ -1,5 +1,4 @@
 import { Global } from '@emotion/react';
-import { GetStaticProps, NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Layout from 'src/components/Layout/Layout';
 import { BlogThemeProvider } from 'src/context/Theme';

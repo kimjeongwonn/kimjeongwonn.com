@@ -1,8 +1,6 @@
-import React from 'react';
 import { PostI } from '../../types/post';
-import ListItem from './ListItem';
 import { ListContainer } from './List.styled';
-import Link from 'next/link';
+import ListItem from './ListItem';
 
 interface Props {
   posts: PostI[];

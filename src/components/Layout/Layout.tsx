@@ -7,7 +7,7 @@ import {
   LayoutHeaderButton,
   LayoutMain,
   YearsContainer,
-  YearsItem
+  YearsItem,
 } from './Layout.styled';
 import LayoutFooter from './LayoutFooter';
 import LayoutHeader from './LayoutHeader';
@@ -23,9 +23,15 @@ const Layout = ({ children, years = [] }: Props) => {
 
   useEffect(() => {
     let lastScrollY = 0;
-    let maxScrollY = window.document.body.scrollHeight - window.visualViewport.height - 1;
+    let maxScrollY =
+      window.document.body.scrollHeight -
+      (window.visualViewport?.height ?? window.innerHeight) -
+      1;
     const resizeHandler = throttle(() => {
-      maxScrollY = window.document.body.scrollHeight - window.visualViewport.height - 1;
+      maxScrollY =
+        window.document.body.scrollHeight -
+        (window.visualViewport?.height ?? window.innerHeight) -
+        1;
     }, 500);
 
     const scrollHandler = throttle(() => {
@@ -44,11 +50,14 @@ const Layout = ({ children, years = [] }: Props) => {
     }, 250);
 
     window.addEventListener('scroll', scrollHandler);
-    window.visualViewport.addEventListener('resize', resizeHandler);
+    (window.visualViewport ?? window).addEventListener('resize', resizeHandler);
 
     return () => {
       window.removeEventListener('scroll', scrollHandler);
-      window.visualViewport.addEventListener('resize', resizeHandler);
+      (window.visualViewport ?? window).addEventListener(
+        'resize',
+        resizeHandler
+      );
     };
   }, []);
 
@@ -60,7 +69,11 @@ const Layout = ({ children, years = [] }: Props) => {
           const activeYear = String(router.query.year) === String(year);
           return (
             <YearsItem key={year} active={activeYear}>
-              <Link passHref href={activeYear ? '/' : `/${year}`} scroll={false}>
+              <Link
+                passHref
+                href={activeYear ? '/' : `/${year}`}
+                scroll={false}
+              >
                 <LayoutHeaderButton as='a'>{year}</LayoutHeaderButton>
               </Link>
             </YearsItem>

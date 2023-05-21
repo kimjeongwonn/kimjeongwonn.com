@@ -19,18 +19,20 @@ export const getStaticPaths: GetStaticPaths<{
     paths: posts.map(post => ({
       params: {
         year: String(dayjs(post.createAt).get('year')),
-        slug: post.slug
-      }
+        slug: post.slug,
+      },
     })),
-    fallback: false
+    fallback: false,
   };
 };
 
-export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PostPageProps> = async ({
+  params,
+}) => {
   const postData = getPostData(String(params?.slug ?? ''));
   if (!postData) {
     return {
-      notFound: true
+      notFound: true,
     };
   }
 
@@ -39,8 +41,8 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) 
       title: postData.title,
       createAt: postData.createAt,
       content: postData.content,
-      excerpt: postData.excerpt
-    }
+      excerpt: postData.excerpt,
+    },
   };
 };
 

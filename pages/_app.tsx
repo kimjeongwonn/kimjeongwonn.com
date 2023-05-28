@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps: { years, ...pageProps } }: AppProps) {
       </Layout>
 
       <Script
-        src='https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID'
+        src='https://www.googletagmanager.com/gtag/js?id=G-KR5J2XMG2B'
         strategy='afterInteractive'
       />
       <Script id='google-analytics' strategy='afterInteractive'>
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps: { years, ...pageProps } }: AppProps) {
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'GA_MEASUREMENT_ID');
+          gtag('config', 'G-KR5J2XMG2B');
         `}
       </Script>
     </BlogThemeProvider>

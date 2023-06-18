@@ -1,7 +1,13 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const ListContainer = styled.ul(({ theme }) => css``);
+export const ListContainer = styled.ul(
+  () => css`
+    & > a:last-of-type li {
+      border-bottom: none;
+    }
+  `
+);
 
 export const ListItemContainer = styled.li(
   ({ theme }) => css`

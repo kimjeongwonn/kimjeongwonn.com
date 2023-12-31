@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sitemap": "node scripts/sitemap_generator.js"
+    "sitemap": "node scripts/sitemap_generator.js",
+    "date": "date -u +\"%Y-%m-%dT%H:%M:%SZ\""
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",

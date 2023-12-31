@@ -1,6 +1,8 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "pasteImage.basePath": "${projectRoot}/public",
-  "pasteImage.path": "${projectRoot}/public/images",
-  "pasteImage.insertPattern": "${imageSyntaxPrefix}/${imageFilePath}${imageSyntaxSuffix}"
+  "markdown.copyFiles.destination": {
+    "contents/*.md": "${documentWorkspaceFolder}/public/images/${fileName}"
+  },
+  "markdown.links.openLocation": "currentGroup"
 }
+O

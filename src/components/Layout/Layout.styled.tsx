@@ -22,6 +22,7 @@ export const LayoutContainer = styled.div(
 export const LayoutHeaderContainer = styled.header<{ extended?: boolean }>(
   ({ theme, extended }) => css`
     position: sticky;
+    z-index: 1;
     top: 0;
     padding: 20px;
     border-bottom: 1px solid ${theme.colors.primaryColor};

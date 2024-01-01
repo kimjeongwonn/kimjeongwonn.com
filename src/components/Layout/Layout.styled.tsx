@@ -64,6 +64,7 @@ export const LayoutHeaderButton = styled.button(
 export const YearsContainer = styled.ul(
   ({}) => css`
     position: fixed;
+    z-index: 2;
     top: 20px;
     right: 20px;
   `

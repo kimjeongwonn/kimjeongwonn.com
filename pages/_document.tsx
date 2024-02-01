@@ -31,6 +31,25 @@ class MyDocument extends Document {
             type='text/css'
             href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css'
           />
+
+          <link
+            rel='alternate'
+            type='application/rss+xml'
+            href='/rss.xml'
+            title='RSS'
+          />
+          <link
+            rel='alternate'
+            type='application/atom+xml'
+            href='/rss-atom.xml'
+            title='RSS Atom'
+          />
+          <link
+            rel='alternate'
+            type='application/json'
+            href='/feed.json'
+            title='JSON Feed'
+          />
         </Head>
         <body>
           <Main />

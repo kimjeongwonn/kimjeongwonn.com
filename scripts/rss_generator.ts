@@ -8,10 +8,11 @@ const EMAIL = 'kimjeongwonn@gmail.com';
 
 const feed = new Feed({
   title: `${BLOG_TITLE} blog`,
+  description: `${BLOG_TITLE} blog`,
   id: BLOG_URL,
   link: BLOG_URL,
   language: 'ko',
-  generator: 'generate-rss',
+  generator: 'feed for Node.js',
   feedLinks: {
     json: `${BLOG_URL}/json`,
     atom: `${BLOG_URL}/atom`,
@@ -23,15 +24,16 @@ const feed = new Feed({
 const posts = getPostList();
 
 for (const post of posts) {
+  const date = new Date(post.createAt);
   feed.addItem({
     title: post.title,
     id: post.slug,
-    link: `${BLOG_URL}/${post.slug}`,
+    link: `${BLOG_URL}/${date.getFullYear()}/${post.slug}`,
     description: post.excerpt,
     content: post.content,
     author: [{ name: AUTHOR, email: EMAIL }],
     contributor: [{ name: AUTHOR, email: EMAIL }],
-    date: new Date(post.createAt),
+    date,
   });
 }
 

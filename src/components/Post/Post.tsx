@@ -27,7 +27,7 @@ const Post = ({ content, createAt, title, excerpt }: PostPageProps) => {
           locale: 'ko_KR',
           type: 'article',
           url: BLOG_URL + router.asPath,
-          site_name: BLOG_TITLE + ' blog',
+          site_name: `${BLOG_TITLE} blog`,
         }}
       />
       <PostArticle>

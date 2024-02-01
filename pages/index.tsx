@@ -12,7 +12,7 @@ interface Props {
 const Home: NextPage<Props> = ({ postList }) => {
   return (
     <>
-      <NextSeo title={BLOG_TITLE + ' blog'} />
+      <NextSeo title={`${BLOG_TITLE} blog`} />
       <List posts={postList} />
     </>
   );

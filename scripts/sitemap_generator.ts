@@ -1,14 +1,15 @@
-const fs = require('fs');
-const path = require('path');
-const globby = require('globby');
-const prettier = require('prettier');
-const matter = require('gray-matter');
+import fs from 'fs';
+import path from 'path';
+import globby from 'globby';
+import prettier from 'prettier';
+import matter from 'gray-matter';
 
 const getDate = new Date().toISOString();
 
 const YOUR_AWESOME_DOMAIN = 'https://kimjeongwonn.com';
 
-const formatted = sitemap => prettier.format(sitemap, { parser: 'html' });
+const formatted = (sitemap: string) =>
+  prettier.format(sitemap, { parser: 'html' });
 
 (async () => {
   const posts = await globby('contents/*.md');
@@ -51,5 +52,5 @@ const formatted = sitemap => prettier.format(sitemap, { parser: 'html' });
 
   const formattedSitemap = formatted(generatedSitemap);
 
-  fs.writeFileSync('out/sitemap.xml', formattedSitemap, 'utf8');
+  fs.writeFileSync('out/sitemap.xml', await formattedSitemap, 'utf8');
 })();

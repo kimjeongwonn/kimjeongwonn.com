@@ -1,10 +1,10 @@
 ---
 title: NoInfer 알아보기
 date: 2024-02-01T13:30:52Z
-excerpt: "제네릭의 타입추론 진정제"
+excerpt: "제네릭의 타입 추론 진정제"
 ---
 
-타입스크립트 5.4 베타가 출시되었고 그에 따라서 [블로그 포스팅](https://devblogs.microsoft.com/typescript/announcing-typescript-5-4-beta/)가 올라왔다. 그 중에서 `NoInfer`라는 이름의 유틸리티 타입이 추가된 게 눈에 띄었는데, 제법 유용하고 자주 사용될 유틸리티 타입이라는 생각이 들어서 정리해봤다. 위 포스팅에서도 잘 설명되어 있지만 간단하게 알아보자.
+Typescript 5.4 beta가 출시되었고 그에 따라서 [블로그 포스팅](https://devblogs.microsoft.com/typescript/announcing-typescript-5-4-beta/)이 올라왔다. 그 중에서 `NoInfer`라는 이름의 유틸리티 타입이 추가된 게 눈에 띄었는데, 제법 유용하고 자주 사용될 유틸리티 타입이라는 생각이 들어서 정리해봤다. 위 포스팅에서도 잘 설명되어 있지만 간단하게 알아보자.
 
 ### No Inference
 

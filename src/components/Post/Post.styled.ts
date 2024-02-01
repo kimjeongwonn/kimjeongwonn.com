@@ -136,11 +136,15 @@ export const PostContent = styled.section(
 
     pre {
       font-family: JetBrains Mono, monospace;
-      padding: 12px;
+      position: relative;
+      box-sizing: border-box;
+      left: -20px;
+      width: min(100vw, 768px);
+      padding: 24px;
       background-color: ${theme.colors.gray['100']};
-      border-radius: 4px;
       line-height: 1.5;
       overflow-x: auto;
+      box-sizing: border-box;
 
       code {
         all: unset;

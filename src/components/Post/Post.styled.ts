@@ -19,6 +19,8 @@ export const PostHeader = styled.header(
 
 export const PostTitle = styled.h1(
   ({ theme }) => css`
+    text-wrap: balance;
+    word-break: keep-all;
     font-size: 36px;
     font-weight: 700;
   `
@@ -80,6 +82,8 @@ export const PostContent = styled.section(
 
     /* headers */
     h2 {
+      text-wrap: balance;
+      word-break: keep-all;
       font-size: 28px;
       font-weight: 700;
       margin: 12px 0;
@@ -87,6 +91,8 @@ export const PostContent = styled.section(
     }
 
     h3 {
+      text-wrap: balance;
+      word-break: keep-all;
       font-size: 22px;
       font-weight: 700;
       margin-top: 8px;
@@ -108,6 +114,7 @@ export const PostContent = styled.section(
     p {
       margin-block-start: 1ch;
       margin-block-end: 1ch;
+      text-wrap: pretty;
     }
 
     strong {
@@ -126,6 +133,7 @@ export const PostContent = styled.section(
 
       color: ${theme.colors.gray[600]};
       font-size: 14px;
+      text-wrap: pretty;
 
       code {
         font-size: 12px;

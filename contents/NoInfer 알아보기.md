@@ -45,7 +45,7 @@ function pick<T, I extends T>(collection: readonly T[], item: I): T;
 pick<typeof fruits[number]>(fruits, "pineapple");
 ```
 
-보통은 첫 번째 방법을 더 활용하겠지만, T타입의 추론을 막기위해서 제네릭을 하나 더 사용해야 하고 I타입은 오직 T타입의 참조를 위해서만 사용되기 때문에 합리적인 방법은 아니다. 이쯤 되면 `NoInfer`유틸리티 타입의 역할을 분명하게 추론할 수 있을 것이다. `NoInfer`유틸리티 타입을 사용하면 아래와 같이 합리적이고 간단한 방법으로 처리할 수 있다.
+보통은 첫 번째 방법을 더 활용하겠지만, T타입의 추론을 막기위해서 제네릭을 하나 더 사용해야 하고 I타입은 오직 T타입의 참조를 위해서만 사용되기 때문에 합리적인 방법은 아니다. 이쯤 되면 `NoInfer`유틸리티 타입의 역할이 추론될 것이다. `NoInfer`유틸리티 타입을 사용하면 아래와 같이 합리적이고 간단한 방법으로 처리할 수 있다.
 
 ```ts
 function pick<T>(collection: readonly T[], item: NoInfer<T>): T;
@@ -70,7 +70,7 @@ type NoInfer<T extends any> = [T][T extends any ? 0 : never];
 > #### 인덱싱된 접근의 역할
 > 인덱싱된 접근은 타입스크립트에게 타입 정보를 '사용'하도록 강제합니다. 즉, [T][0]은 타입스크립트에게 T 타입의 값을 단순히 사용하는 것이 아니라, 특정 구조(이 경우 튜플) 내에서 T의 타입을 확인하도록 요구합니다. 이 과정에서 타입 추론이 특정 지점에서 '멈추고', 명시적으로 제공된 타입이나 이전에 추론된 타입을 그대로 사용하게 합니다.
 
-아마 `never`타입을 추론하기 위해서
+이걸 보고 생각난 것이 `never`타입을 추론하기 위해서
 
 ```ts
 type IsNever<T> = [T] extends [never] ? true : false;

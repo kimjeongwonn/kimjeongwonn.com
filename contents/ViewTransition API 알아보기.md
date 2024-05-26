@@ -321,5 +321,6 @@ ViewTransition API를 사용해서 Navigating을 하게되면 자연스러운 �
 
 ## 참고 자료
 
-[Chrome for developer - ViewTransition API](https://developer.chrome.com/docs/web-platform/view-transitions?hl=ko)
-[WICG - view-transition/explainer.md](https://github.com/WICG/view-transitions/blob/main/explainer.md)
+- [Chrome for developer - ViewTransition API](https://developer.chrome.com/docs/web-platform/view-transitions?hl=ko)
+
+- [WICG - view-transition/explainer.md](https://github.com/WICG/view-transitions/blob/main/explainer.md)

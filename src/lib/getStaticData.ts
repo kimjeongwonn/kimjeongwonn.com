@@ -17,6 +17,13 @@ const md = new MarkdownIt({
     return '';
   },
 });
+md.renderer.rules.image = (tokens, idx) => {
+  const token = tokens[idx];
+  const src = token.attrGet('src');
+  const alt = token.content;
+
+  return `<a href="${src}" target="_blank"><img src="${src}" alt="${alt}"></a>`;
+};
 
 const contents: PostI[] = [];
 const years: Set<number> = new Set();

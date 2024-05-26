@@ -242,7 +242,7 @@ Navigation Bar 같은 경우에는 List에서 Detail로 이동할 때는 이전 
 
 이렇게 해주면 아래와 같이 Navigation Bar가 나타나고 사라진다.
 
-![Navigation Bar가 나타나고 사라질 때의 화면](images/example5.gif)
+![Navigation Bar가 나타나고 사라질 때의 화면](/images/example5.gif)
 
 마지막으로 BACK버튼을 통해 뒤로갔을 때 title과 image가 원래 위치로 돌아가도록 할 수도 있다. 그러기 위해서는 현재 돌아가야 하는 List Item을 특정할 수 있어야 한다. 예시에서는 List Item에 `data-item-id`어트리뷰트를 통해 특정할 수 있도록 구성했다. 그리고 아래와 같이 코드를 작성한다.
 

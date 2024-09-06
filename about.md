@@ -16,7 +16,7 @@ title: 'About'
 - React
 - Next.js
 
-[github](https://github.com/kimjeongwonn)
+[github](https://github.com/kimjeongwonn) [linkedin](https://www.linkedin.com/in/jeongwon-kim-011416192)
 
 ---
 

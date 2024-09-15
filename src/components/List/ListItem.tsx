@@ -16,7 +16,11 @@ const ListItem = ({ item }: Props) => {
   const { slug, title, excerpt, createAt } = item;
 
   return (
-    <Link href={`/${dayjs(createAt).get('year')}/${slug}`} passHref>
+    <Link
+      href={`/${dayjs(createAt).get('year')}/${slug}`}
+      passHref
+      legacyBehavior
+    >
       <a>
         <ListItemContainer>
           <ListItemTime>{dayjs(createAt).format('YYYY/MM/DD')}</ListItemTime>

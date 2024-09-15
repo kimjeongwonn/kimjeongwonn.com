@@ -71,6 +71,7 @@ const Layout = ({ children, years = [] }: Props) => {
             <YearsItem key={year} active={activeYear}>
               <Link
                 passHref
+                legacyBehavior
                 href={activeYear ? '/' : `/${year}`}
                 scroll={false}
               >

@@ -25,7 +25,7 @@ title: 'About'
 ##### 비바리퍼블리카(토스) (2024~)
 
 - 2024.09 ~
-  - Frontend Platform Tribe Client DevOps Team
+  - Client Platform Tribe Client DevOps Team
 
 ##### 드라마앤컴퍼니 (2021~2024)
 
